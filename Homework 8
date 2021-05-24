@@ -1,0 +1,39 @@
+import os.path
+
+def fileCheck():
+    fileName = input("What would you like to name your file? \n")
+    if os.path.exists(fileName): 
+        newFile=open(fileName, "a+")
+        fileIntent=input("Sorry, that name already exists.. :-(.. \nWhat would you like to do with the file? Please enter a letter for an option: \n A) Read the file \n B) Delete the file and start over \n C) Append the file \n")
+        if fileIntent == "A":
+            # newFile.close()
+            # newFile=open(fileName, "r")
+            toPrint = newFile.read()
+            print(toPrint)
+        elif fileIntent == "B":
+            # newFile.close()
+            # newFile=open(fileName, "w")
+            newFile.seek(0)
+            newFileContent = input("Please input your text to replace the file in the field below:\n")
+            newFile.write(newFileContent)
+        elif fileIntent == "C":
+            addedFileContent = input("Please enter the text you'd like to add to this file:\n") 
+            newFile.write(addedFileContent)
+            newFile.seek(0)
+            readFile = newFile.read()
+            print(readFile)
+        else:
+            print("You did something wrong...")
+    else:
+        freshFileContent = input("This file name doesn't exist! \nPlease enter the text you'd like to add to this file: \n")
+        newFile=open(fileName, "a+")
+        newFile.write(freshFileContent) 
+        # readFile = newFile.readlines()
+        print(newFile.read())
+   
+    newFile.seek(0)
+    readFile = newFile.read()
+    print(readFile)
+    newFile.close()
+
+fileCheck()
